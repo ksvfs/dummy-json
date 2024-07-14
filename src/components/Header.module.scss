@@ -1,0 +1,17 @@
+.header {
+  padding: 1em;
+  border-bottom: 1px solid var(--header-foreground);
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+}
+
+.navLink {
+  color: var(--header-foreground);
+  text-decoration: none;
+}
+
+.navLinkActive {
+  @extend .navLink;
+  font-weight: bold;
+}
