@@ -23,9 +23,7 @@ export default function Products({ products }: ProductsProps) {
             </div>
           </div>
 
-          <div className={styles.title}>
-            {product.id} {product.title}
-          </div>
+          <div className={styles.title}>{product.title}</div>
         </div>
       ))}
     </section>
