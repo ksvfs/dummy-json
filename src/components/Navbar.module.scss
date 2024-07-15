@@ -1,9 +1,10 @@
 .header {
+  height: var(--navbar-height);
   margin-inline: 1em;
-  padding-block: 1em;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 3em;
 }
 
