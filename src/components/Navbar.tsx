@@ -12,7 +12,7 @@ function getNavLinkClassName({ isActive }: NavLinkRenderProps) {
   return isActive ? styles.navLinkActive : styles.navLink;
 }
 
-export default function Header() {
+export default function Navbar() {
   return (
     <header className={styles.header}>
       <NavLink to="/" className={getNavLinkClassName}>

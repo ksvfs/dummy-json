@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import Page2 from './pages/Page2';
@@ -10,7 +10,7 @@ import NotFoundPage from './pages/NotFoundPage';
 export default function App() {
   return (
     <>
-      <Header />
+      <Navbar />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
