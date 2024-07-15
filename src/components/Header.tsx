@@ -16,11 +16,11 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <NavLink to="/" className={getNavLinkClassName}>
-        Home
+        Главная
       </NavLink>
 
-      <NavLink to="/page1" className={getNavLinkClassName}>
-        Page 1
+      <NavLink to="/products" className={getNavLinkClassName}>
+        Товары
       </NavLink>
 
       <NavLink to="/page2" className={getNavLinkClassName}>

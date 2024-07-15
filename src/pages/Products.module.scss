@@ -1,0 +1,39 @@
+section {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.product {
+  padding: 1em;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5em;
+}
+
+.priceAndRating {
+  padding-top: 0.5em;
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.3rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  font-size: 0.8rem;
+
+  & > svg {
+    opacity: 0.8;
+    width: 0.9em;
+  }
+}
+
+.title {
+  padding-top: 0.5em;
+}

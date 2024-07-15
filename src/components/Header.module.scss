@@ -1,13 +1,14 @@
 .header {
-  padding: 1em;
-  border-bottom: 1px solid var(--header-foreground);
+  margin-inline: 1em;
+  padding-block: 1em;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
   gap: 3em;
 }
 
 .navLink {
-  color: var(--header-foreground);
+  color: var(--header-foreground-color);
   text-decoration: none;
 }
 
