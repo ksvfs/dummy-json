@@ -4,7 +4,15 @@
   box-sizing: border-box;
 }
 
-img {
+img,
+svg {
   max-width: 100%;
   display: block;
+}
+
+button {
+  border: none;
+  font: inherit;
+  background-color: transparent;
+  color: inherit;
 }

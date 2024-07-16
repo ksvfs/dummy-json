@@ -3,17 +3,24 @@
   margin-inline: 1em;
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 3em;
+  background-color: var(--main-background-color);
 }
 
 .navLink {
-  color: var(--header-foreground-color);
+  color: var(--main-foreground-color);
   text-decoration: none;
 }
 
 .navLinkActive {
   @extend .navLink;
   font-weight: bold;
+}
+
+.colorThemeSwitch svg {
+  width: 1.3em;
+  height: 1.3em;
+  cursor: pointer;
 }

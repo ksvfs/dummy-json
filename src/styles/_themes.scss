@@ -1,5 +1,11 @@
 .light {
-  --body-background-color: white;
-  --header-foreground-color: black;
+  --main-foreground-color: black;
+  --main-background-color: white;
   --border-color: rgba(200, 200, 200, 1);
+}
+
+.dark {
+  --main-foreground-color: white;
+  --main-background-color: black;
+  --border-color: rgba(100, 100, 100, 1);
 }
