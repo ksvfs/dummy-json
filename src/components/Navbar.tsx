@@ -15,20 +15,8 @@ function getNavLinkClassName({ isActive }: NavLinkRenderProps) {
 export default function Navbar() {
   return (
     <header className={styles.header}>
-      <NavLink to="/" className={getNavLinkClassName}>
-        Главная
-      </NavLink>
-
       <NavLink to="/products" className={getNavLinkClassName}>
         Товары
-      </NavLink>
-
-      <NavLink to="/page2" className={getNavLinkClassName}>
-        Page 2
-      </NavLink>
-
-      <NavLink to="/page3" className={getNavLinkClassName}>
-        Page 3
       </NavLink>
     </header>
   );
