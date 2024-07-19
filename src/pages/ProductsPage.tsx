@@ -20,46 +20,7 @@ export default function ProductsPage() {
   const [canFetchMore, setCanFetchMore] = useState(true);
 
   useEffect(() => {
-    const abortController = new AbortController();
-
     async function fetchData() {
-      try {
-        setIsLoading(true);
-
-        const response = await fetch(
-          'https://dummyjson.com/products?select=id,thumbnail,price,rating,title',
-          { signal: abortController.signal }
-        );
-
-        if (!response.ok) {
-          throw new Error();
-        }
-
-        const data = await response.json();
-        const products = filterProducts(data.products);
-
-        setProducts((prevProducts) => [...prevProducts, ...products]);
-        setCurrentPage((prevCurrentPage) => prevCurrentPage + 1);
-        setIsLoading(false);
-      } catch {
-        if (!abortController.signal.aborted) {
-          setError(true);
-          setIsLoading(false);
-        }
-      }
-    }
-
-    fetchData();
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    async function fetchMore() {
       if (!canFetchMore) return;
 
       try {
@@ -91,13 +52,19 @@ export default function ProductsPage() {
       }
     }
 
+    const abortController = new AbortController();
+
+    if (currentPage === 0) {
+      fetchData();
+    }
+
     let fetchCalled = false;
 
     function handlePageEnd() {
       const pixelsLeft = document.body.scrollHeight - (window.scrollY + window.innerHeight);
 
       if (pixelsLeft < 500 && !fetchCalled) {
-        fetchMore();
+        fetchData();
         fetchCalled = true;
       }
     }
