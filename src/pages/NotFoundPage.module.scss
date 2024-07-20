@@ -1,0 +1,12 @@
+.errorSection {
+  height: calc(100dvh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorCode {
+  font-size: 10rem;
+  font-weight: bold;
+}
