@@ -7,9 +7,12 @@ import App from './App';
 
 import './main.scss';
 
+const isLocalhost = window.location.hostname === 'localhost';
+const basename = isLocalhost ? '' : '/dummy-json/';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </React.StrictMode>
