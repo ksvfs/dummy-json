@@ -56,3 +56,28 @@
 .title {
   padding-top: 0.5em;
 }
+
+.searchForm {
+  margin-inline: 1em;
+  margin-top: 1em;
+  display: flex;
+}
+
+.searchButton {
+  padding-inline: 0.5em;
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-radius: 0 0.3em 0.3em 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.3em 0.5em;
+  border: 1px solid var(--border-color);
+  border-radius: 0.3em 0 0 0.3em;
+  background-color: var(--mainBackgroundColor);
+
+  &:focus {
+    outline: none;
+  }
+}
