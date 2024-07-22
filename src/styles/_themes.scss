@@ -1,13 +1,13 @@
 .light {
-  --main-foreground-color: black;
-  --main-background-color: white;
+  --main-foreground-color: rgb(10, 10, 10);
+  --main-background-color: rgb(255, 255, 255);
   --navbar-background-color: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(200, 200, 200, 1);
+  --border-color: rgb(200, 200, 200);
 }
 
 .dark {
-  --main-foreground-color: white;
-  --main-background-color: black;
-  --navbar-background-color: rgba(0, 0, 0, 0.7);
-  --border-color: rgba(100, 100, 100, 1);
+  --main-foreground-color: rgb(255, 255, 255);
+  --main-background-color: rgb(10, 10, 10);
+  --navbar-background-color: rgba(10, 10, 10, 0.7);
+  --border-color: rgb(100, 100, 100);
 }
