@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
 import FetchingError from '../components/FetchingError';
@@ -30,9 +30,8 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [canFetchMore, setCanFetchMore] = useState(true);
   const [searchText, setSearchText] = useState('');
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [showSearchResults, setShowSearchResults] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const searchQuery = searchParams.get('search');
@@ -79,11 +78,11 @@ export default function ProductsPage() {
     e.preventDefault();
 
     if (searchText.trim()) {
-      navigate(`/products?search=${searchText}`);
+      setSearchParams({ search: searchText });
       setShowSearchResults(true);
     } else {
       if (!searchParams.get('search')) return;
-      navigate('/products');
+      setSearchParams({});
       setProducts([]);
       setCurrentPage(0);
     }
