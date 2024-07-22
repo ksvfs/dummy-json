@@ -1,4 +1,7 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   height: var(--navbar-height);
   margin-inline: 1em;
   border-bottom: 1px solid var(--border-color);
@@ -6,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 3em;
-  background-color: var(--main-background-color);
+  background-color: var(--navbar-background-color);
 }
 
 .navLink {
