@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
 import FetchingError from '../components/FetchingError';
+import NoSearchResults from '../components/NoSearchResults.tsx';
 
 import { Product } from '../types/types.ts';
 
@@ -167,26 +168,49 @@ export default function ProductsPage() {
     };
   }, [products, currentPage, canFetchMore, getNextPage, searchParams]);
 
+  const searchForm = (
+    <form className={styles.searchForm} onSubmit={search}>
+      <input
+        className={styles.searchInput}
+        type="text"
+        placeholder="Поиск товара (например, Apple)"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <button className={styles.searchButton}>{icons.search}</button>
+    </form>
+  );
+
   if (isLoading && (currentPage === 0 || searchParams.get('search'))) {
-    return <Loading />;
+    return (
+      <>
+        {searchForm}
+        <Loading />
+      </>
+    );
   }
 
   if (error) {
-    return <FetchingError />;
+    return (
+      <>
+        {searchForm}
+        <FetchingError />
+      </>
+    );
+  }
+
+  if (showSearchResults && products.length === 0) {
+    return (
+      <>
+        {searchForm}
+        <NoSearchResults />
+      </>
+    );
   }
 
   return (
     <>
-      <form className={styles.searchForm} onSubmit={search}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          placeholder="Поиск товара (например, Apple)"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <button className={styles.searchButton}>{icons.search}</button>
-      </form>
+      {searchForm}
 
       <section className={styles.section}>
         {products.map((product) => (
