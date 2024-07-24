@@ -1,8 +1,7 @@
 .loading {
-  height: calc(100dvh - var(--navbar-height));
+  margin-top: calc(50dvh - 5rem);
   display: flex;
   justify-content: center;
-  align-items: center;
 
   & > svg {
     height: 3rem;

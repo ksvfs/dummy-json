@@ -1,8 +1,7 @@
 .errorSection {
-  height: calc(100dvh - var(--navbar-height));
+  margin-top: calc(50dvh - 10rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
