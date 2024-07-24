@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
+import Products from '../components/Products.tsx';
 import FetchingError from '../components/FetchingError';
-import NoSearchResults from '../components/NoSearchResults.tsx';
+import NoSearchResults from '../components/NoSearchResults';
 
 import fetchData from '../utils/fetchData.ts';
-
 import styles from './ProductsPage.module.scss';
 import icons from '../assets/icons.tsx';
 
@@ -70,7 +70,7 @@ export default function ProductsPage() {
       setSearchParams({ search: searchText });
       setShowSearchResults(true);
     } else {
-      if (!searchParams.get('search')) return;
+      if (!searchParams.has('search')) return;
       setSearchParams({});
       setProducts([]);
       setCurrentPage(0);
@@ -107,7 +107,7 @@ export default function ProductsPage() {
   );
 
   useEffect(() => {
-    if (searchParams.get('search')) return;
+    if (searchParams.has('search')) return;
 
     const abortController = new AbortController();
 
@@ -136,68 +136,32 @@ export default function ProductsPage() {
     };
   }, [products, currentPage, canFetchMore, getNextPage, searchParams]);
 
-  const searchForm = (
-    <form className={styles.searchForm} onSubmit={search}>
-      <input
-        className={styles.searchInput}
-        type="text"
-        placeholder="Поиск товара (например, Apple)"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button className={styles.searchButton}>{icons.search}</button>
-    </form>
-  );
-
-  if (isLoading && (currentPage === 0 || searchParams.get('search'))) {
-    return (
-      <>
-        {searchForm}
-        <Loading />
-      </>
-    );
-  }
-
-  if (error) {
-    return (
-      <>
-        {searchForm}
-        <FetchingError />
-      </>
-    );
-  }
-
-  if (showSearchResults && products.length === 0) {
-    return (
-      <>
-        {searchForm}
-        <NoSearchResults />
-      </>
-    );
+  function renderComponent() {
+    if (isLoading && (currentPage === 0 || searchParams.has('search'))) {
+      return <Loading />;
+    } else if (error) {
+      return <FetchingError />;
+    } else if (showSearchResults && products.length === 0) {
+      return <NoSearchResults />;
+    } else {
+      return <Products products={products} />;
+    }
   }
 
   return (
     <>
-      {searchForm}
+      <form className={styles.searchForm} onSubmit={search}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Поиск товара (например, Apple)"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button className={styles.searchButton}>{icons.search}</button>
+      </form>
 
-      <section className={styles.section}>
-        {products.map((product) => (
-          <div className={styles.product} key={product.id}>
-            <div className={styles.thumbnail}>
-              <img src={product.thumbnail} alt={product.title} />
-            </div>
-
-            <div className={styles.priceAndRating}>
-              <div className={styles.price}>${product.price}</div>
-              <div className={styles.rating}>
-                {icons.star} {product.rating}
-              </div>
-            </div>
-
-            <div className={styles.title}>{product.title}</div>
-          </div>
-        ))}
-      </section>
+      {renderComponent()}
     </>
   );
 }
