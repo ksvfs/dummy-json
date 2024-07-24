@@ -1,7 +1,7 @@
 import styles from './Products.module.scss';
-import icons from '../assets/icons.tsx';
+import icons from '../assets/icons';
 
-import type { Product } from '../types/types.ts';
+import type { Product } from '../types/types';
 
 type ProductsProps = {
   products: Product[];

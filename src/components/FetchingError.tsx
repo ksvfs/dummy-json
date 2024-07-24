@@ -1,5 +1,5 @@
-import icons from '../assets/icons.tsx';
 import styles from './FetchingError.module.scss';
+import icons from '../assets/icons';
 
 export default function FetchingError() {
   return (

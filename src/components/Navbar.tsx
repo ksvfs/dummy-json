@@ -1,9 +1,8 @@
 import { useState, useLayoutEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
 
 import styles from './Navbar.module.scss';
-import icons from '../assets/icons.tsx';
+import icons from '../assets/icons';
 
 type NavLinkRenderProps = {
   isActive: boolean;

@@ -2,15 +2,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
-import Products from '../components/Products.tsx';
+import Products from '../components/Products';
 import FetchingError from '../components/FetchingError';
 import NoSearchResults from '../components/NoSearchResults';
 
-import fetchData from '../utils/fetchData.ts';
+import fetchData from '../utils/fetchData';
 import styles from './ProductsPage.module.scss';
-import icons from '../assets/icons.tsx';
+import icons from '../assets/icons';
 
-import type { Product } from '../types/types.ts';
+import type { Product } from '../types/types';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,4 +1,4 @@
-import type { Product } from '../types/types.ts';
+import type { Product } from '../types/types';
 
 // prettier-ignore
 const uglyProductsIds = new Set([
