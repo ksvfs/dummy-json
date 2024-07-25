@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
@@ -21,6 +21,8 @@ export default function ProductsPage() {
   const [searchText, setSearchText] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const [showSearchResults, setShowSearchResults] = useState(false);
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const getSearchResults = useCallback(async (searchQuery: string) => {
     setIsLoading(true);
@@ -123,6 +125,7 @@ export default function ProductsPage() {
 
   function onSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    searchInputRef.current?.blur();
 
     if (searchText.trim()) {
       setSearchParams({ search: searchText });
@@ -156,6 +159,7 @@ export default function ProductsPage() {
           placeholder="Поиск товара (например, Apple)"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          ref={searchInputRef}
         />
         <button className={styles.searchButton}>{icons.search}</button>
       </form>
