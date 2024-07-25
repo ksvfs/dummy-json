@@ -22,21 +22,7 @@ export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [showSearchResults, setShowSearchResults] = useState(false);
 
-  useEffect(() => {
-    const searchQuery = searchParams.get('search');
-
-    if (!searchQuery && showSearchResults) {
-      setShowSearchResults(false);
-      setSearchText('');
-      setProducts([]);
-      setCurrentPage(0);
-    } else if (searchQuery) {
-      setShowSearchResults(true);
-      setSearchText(searchQuery);
-    }
-  }, [searchParams, showSearchResults]);
-
-  const getSearchResults = useCallback(async function getSearchResults(searchQuery: string) {
+  const getSearchResults = useCallback(async (searchQuery: string) => {
     setIsLoading(true);
 
     const abortController = new AbortController();
@@ -55,27 +41,23 @@ export default function ProductsPage() {
     setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    const search = searchParams.get('search');
+  useEffect(
+    function handleSearchParams() {
+      const searchQuery = searchParams.get('search');
 
-    if (search) {
-      getSearchResults(search);
-    }
-  }, [searchParams, getSearchResults]);
-
-  function search(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    if (searchText.trim()) {
-      setSearchParams({ search: searchText });
-      setShowSearchResults(true);
-    } else {
-      if (!searchParams.has('search')) return;
-      setSearchParams({});
-      setProducts([]);
-      setCurrentPage(0);
-    }
-  }
+      if (!searchQuery && showSearchResults) {
+        setShowSearchResults(false);
+        setSearchText('');
+        setProducts([]);
+        setCurrentPage(0);
+      } else if (searchQuery) {
+        getSearchResults(searchQuery);
+        setShowSearchResults(true);
+        setSearchText(searchQuery);
+      }
+    },
+    [searchParams, showSearchResults, getSearchResults]
+  );
 
   const getNextPage = useCallback(
     async (abortController: AbortController) => {
@@ -106,35 +88,52 @@ export default function ProductsPage() {
     [products, currentPage, canFetchMore]
   );
 
-  useEffect(() => {
-    if (searchParams.has('search')) return;
+  useEffect(
+    function handlePagination() {
+      if (searchParams.has('search')) return;
 
-    const abortController = new AbortController();
+      const abortController = new AbortController();
 
-    if (currentPage === 0) {
-      getNextPage(abortController);
-    }
-
-    let fetchCalled = false;
-
-    function handlePageEnd() {
-      if (fetchCalled) return;
-
-      const pixelsLeft = document.body.scrollHeight - (window.scrollY + window.innerHeight);
-
-      if (pixelsLeft < 500) {
+      if (currentPage === 0) {
         getNextPage(abortController);
-        fetchCalled = true;
       }
+
+      let fetchCalled = false;
+
+      function handlePageEnd() {
+        if (fetchCalled) return;
+
+        const pixelsLeft = document.body.scrollHeight - (window.scrollY + window.innerHeight);
+
+        if (pixelsLeft < 500) {
+          getNextPage(abortController);
+          fetchCalled = true;
+        }
+      }
+
+      document.addEventListener('scroll', handlePageEnd);
+
+      return () => {
+        document.removeEventListener('scroll', handlePageEnd);
+        abortController.abort();
+      };
+    },
+    [products, currentPage, canFetchMore, getNextPage, searchParams]
+  );
+
+  function onSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (searchText.trim()) {
+      setSearchParams({ search: searchText });
+      setShowSearchResults(true);
+    } else {
+      if (!searchParams.has('search')) return;
+      setSearchParams({});
+      setProducts([]);
+      setCurrentPage(0);
     }
-
-    document.addEventListener('scroll', handlePageEnd);
-
-    return () => {
-      document.removeEventListener('scroll', handlePageEnd);
-      abortController.abort();
-    };
-  }, [products, currentPage, canFetchMore, getNextPage, searchParams]);
+  }
 
   function renderComponent() {
     if (isLoading && (currentPage === 0 || searchParams.has('search'))) {
@@ -150,7 +149,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <form className={styles.searchForm} onSubmit={search}>
+      <form className={styles.searchForm} onSubmit={onSearchSubmit}>
         <input
           className={styles.searchInput}
           type="text"
