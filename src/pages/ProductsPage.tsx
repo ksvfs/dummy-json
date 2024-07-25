@@ -19,8 +19,9 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [canFetchMore, setCanFetchMore] = useState(true);
   const [searchText, setSearchText] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
   const [showSearchResults, setShowSearchResults] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
