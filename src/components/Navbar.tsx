@@ -35,7 +35,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="bg-navbar-light dark:bg-navbar-dark sticky top-0 flex h-14 items-center justify-between gap-12 px-4 backdrop-blur">
+    <header className="sticky top-0 z-10 flex h-14 items-center justify-between gap-12 bg-navbar-light px-4 backdrop-blur dark:bg-navbar-dark">
       <nav>
         <NavLink to="/products" className={({ isActive }) => (isActive ? 'font-bold' : '')}>
           Товары

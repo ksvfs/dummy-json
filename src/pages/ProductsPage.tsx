@@ -152,15 +152,18 @@ export default function ProductsPage() {
 
   return (
     <>
-      <form onSubmit={onSearchSubmit}>
+      <form onSubmit={onSearchSubmit} className="mx-4 flex">
         <input
           type="text"
           placeholder="Поиск товара (например, Apple)"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           ref={searchInputRef}
+          className="placeholder:text-gray w-full rounded-l rounded-r-none border border-border-light bg-light px-2 py-[0.15rem] placeholder:text-dark placeholder:opacity-65 focus-visible:border-black focus-visible:outline-none dark:border-border-dark dark:bg-dark dark:placeholder:text-light dark:placeholder:opacity-45 dark:focus-visible:border-white"
         />
-        <button>{icons.search}</button>
+        <button className="rounded-r border border-l-0 border-border-light bg-light px-2 focus-visible:border-l focus-visible:border-black focus-visible:outline-none active:border-l active:border-black dark:border-border-dark dark:bg-dark dark:focus-visible:border-white dark:active:border-white">
+          {icons.search}
+        </button>
       </form>
 
       {renderComponent()}
