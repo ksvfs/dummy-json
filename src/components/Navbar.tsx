@@ -35,12 +35,16 @@ export default function Navbar() {
   }
 
   return (
-    <header>
+    <header className="bg-navbar-light dark:bg-navbar-dark sticky top-0 flex h-14 items-center justify-between gap-12 px-4 backdrop-blur">
       <nav>
-        <NavLink to="/products">Товары</NavLink>
+        <NavLink to="/products" className={({ isActive }) => (isActive ? 'font-bold' : '')}>
+          Товары
+        </NavLink>
       </nav>
 
-      <button onClick={switchTheme}>{themeIcon}</button>
+      <button onClick={switchTheme} className="*:h-5 *:w-5">
+        {themeIcon}
+      </button>
     </header>
   );
 }
