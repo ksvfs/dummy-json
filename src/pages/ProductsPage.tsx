@@ -7,7 +7,6 @@ import FetchingError from '../components/FetchingError';
 import NoSearchResults from '../components/NoSearchResults';
 
 import fetchData from '../utils/fetchData';
-import styles from './ProductsPage.module.scss';
 import icons from '../assets/icons';
 
 import type { Product } from '../types/types';
@@ -153,16 +152,15 @@ export default function ProductsPage() {
 
   return (
     <>
-      <form className={styles.searchForm} onSubmit={onSearchSubmit}>
+      <form onSubmit={onSearchSubmit}>
         <input
-          className={styles.searchInput}
           type="text"
           placeholder="Поиск товара (например, Apple)"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           ref={searchInputRef}
         />
-        <button className={styles.searchButton}>{icons.search}</button>
+        <button>{icons.search}</button>
       </form>
 
       {renderComponent()}

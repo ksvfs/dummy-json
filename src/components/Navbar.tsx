@@ -1,18 +1,7 @@
 import { useState, useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import styles from './Navbar.module.scss';
 import icons from '../assets/icons';
-
-type NavLinkRenderProps = {
-  isActive: boolean;
-  isPending: boolean;
-  isTransitioning: boolean;
-};
-
-function getNavLinkClassName({ isActive }: NavLinkRenderProps) {
-  return isActive ? styles.navLinkActive : styles.navLink;
-}
 
 export default function Navbar() {
   const [themeIcon, setThemeIcon] = useState<JSX.Element>();
@@ -46,16 +35,12 @@ export default function Navbar() {
   }
 
   return (
-    <header className={styles.header}>
+    <header>
       <nav>
-        <NavLink to="/products" className={getNavLinkClassName}>
-          Товары
-        </NavLink>
+        <NavLink to="/products">Товары</NavLink>
       </nav>
 
-      <button className={styles.colorThemeSwitch} onClick={switchTheme}>
-        {themeIcon}
-      </button>
+      <button onClick={switchTheme}>{themeIcon}</button>
     </header>
   );
 }
