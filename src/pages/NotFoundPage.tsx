@@ -1,10 +1,22 @@
-import styles from './NotFoundPage.module.scss';
+import styled from 'styled-components';
 
 export default function NotFoundPage() {
   return (
-    <section className={styles.errorSection}>
-      <div className={styles.errorCode}>404</div>
+    <Container>
+      <ErrorCode>404</ErrorCode>
       <div>Страница не найдена</div>
-    </section>
+    </Container>
   );
 }
+
+const Container = styled.section`
+  margin-top: calc(50dvh - 10rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ErrorCode = styled.div`
+  font-size: 10rem;
+  font-weight: bold;
+`;

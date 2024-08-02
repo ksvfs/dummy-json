@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Loading from '../components/Loading';
 import Products from '../components/Products';
@@ -7,7 +8,6 @@ import FetchingError from '../components/FetchingError';
 import NoSearchResults from '../components/NoSearchResults';
 
 import fetchData from '../utils/fetchData';
-import styles from './ProductsPage.module.scss';
 import icons from '../assets/icons';
 
 import type { Product } from '../types/types';
@@ -153,19 +153,42 @@ export default function ProductsPage() {
 
   return (
     <>
-      <form className={styles.searchForm} onSubmit={onSearchSubmit}>
-        <input
-          className={styles.searchInput}
+      <SearchForm onSubmit={onSearchSubmit}>
+        <SearchInput
           type="text"
           placeholder="Поиск товара (например, Apple)"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           ref={searchInputRef}
         />
-        <button className={styles.searchButton}>{icons.search}</button>
-      </form>
+        <SearchButton>{icons.search}</SearchButton>
+      </SearchForm>
 
       {renderComponent()}
     </>
   );
 }
+
+const SearchForm = styled.form`
+  margin-inline: 1em;
+  display: flex;
+`;
+
+const SearchButton = styled.button`
+  padding-inline: 0.5em;
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-radius: 0 0.3em 0.3em 0;
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 0.3em 0.5em;
+  border: 1px solid var(--border-color);
+  border-radius: 0.3em 0 0 0.3em;
+  background-color: var(--mainBackgroundColor);
+
+  &:focus {
+    outline: none;
+  }
+`;
