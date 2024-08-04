@@ -12,7 +12,7 @@ https://tsykunov.ru/dummy-json
 
 Получение и вывод данных о товарах из [DummyJSON API](https://dummyjson.com/docs/products) с динамической пагинацией и поиском.
 
-Есть 3 версии проекта с разными способами стилизации:
+Есть 3 версии проекта с разными способами стилизации (SCSS-модули, styled-components и TailwindCSS):
 
 <img src="https://github.com/user-attachments/assets/82eaef4e-02cd-4b10-9b8d-fc1b8184d69c" width="300" />
 
